@@ -1,0 +1,30 @@
+name: wait-for-cirrus
+description: waits for a cirrus task to complete and downloads its artifacts
+inputs:
+  task:
+    description: cirrus task name
+    required: true
+  repo:
+    default: ${{ github.repository }}
+  commit:
+    default: ${{ github.sha }}
+  dest:
+    default: dist
+  token:
+    default: ${{ github.token }}
+runs:
+  using: composite
+  steps:
+  - run: |
+      python3 -uS ${{ github.action_path }}/bin/download-cirrus-artifacts \
+        --task "$INPUT_TASK" \
+        --repo "$INPUT_REPO" \
+        --commit "$INPUT_COMMIT" \
+        --dest "$INPUT_DEST"
+    shell: bash
+    env:
+      INPUT_TASK: ${{ inputs.task }}
+      INPUT_REPO: ${{ inputs.repo }}
+      INPUT_COMMIT: ${{ inputs.commit }}
+      INPUT_DEST: ${{ inputs.dest }}
+      INPUT_TOKEN: ${{ inputs.token }}
