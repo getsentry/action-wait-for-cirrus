@@ -20,7 +20,7 @@ you will want to include a `timeout-minutes` on the step using this action or
 it will poll forever for missing tasks
 
 ```yaml
-  - uses: getsentry/action-wait-for-cirrus@main
+  - uses: getsentry/action-wait-for-cirrus@v1.0.0
     with:
       task: task name here
     timeout-minutes: 15
@@ -29,7 +29,7 @@ it will poll forever for missing tasks
 when used for both pull requests and pushes you'll need to override commit:
 
 ```yaml
-  - uses: getsentry/action-wait-for-cirrus@main
+  - uses: getsentry/action-wait-for-cirrus@v1.0.0
     with:
       task: task name here
       commit: ${{ github.event.pull_request.head.sha || github.sha }}
